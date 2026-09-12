@@ -33,6 +33,11 @@ public class SimpleHudClient implements ClientModInitializer {
     /** Keybind kanggo mbukak layar HUD Editor (unbound dhisik, kudu di-bind dhewe). */
     public static KeyMapping OPEN_EDITOR_KEY;
 
+    /** Kategori keybind, ben nongol dadi grup dhewe nok Options > Controls. */
+    private static final KeyMapping.Category CATEGORY = KeyMapping.Category.register(
+            ResourceLocation.fromNamespaceAndPath(MOD_ID, "main")
+    );
+
     // --- Kanggo ngitung FPS dhewe (ora gumantung nok field internal game) ---
     private static int frameCounter = 0;
     private static long lastFpsSampleTime = System.currentTimeMillis();
@@ -49,7 +54,7 @@ public class SimpleHudClient implements ClientModInitializer {
                 "key.simplehud.open_editor",
                 InputConstants.Type.KEYSYM,
                 InputConstants.UNKNOWN.getValue(),
-                "category.simplehud"
+                CATEGORY
         ));
 
         // Cek saben tick klien: nek tombol dipencet lan gak ono layar liyo

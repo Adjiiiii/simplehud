@@ -3,6 +3,7 @@ package my.simplehud.client;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.GuiGraphicsExtractor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
 
 import java.util.LinkedHashMap;
@@ -111,7 +112,11 @@ public class HudEditScreen extends Screen {
     }
 
     @Override
-    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+    public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
+        double mouseX = event.x();
+        double mouseY = event.y();
+        int button = event.button();
+
         String key = findElementAt(mouseX, mouseY);
         if (key != null) {
             if (button == 1) {
@@ -128,26 +133,26 @@ public class HudEditScreen extends Screen {
                 return true;
             }
         }
-        return super.mouseClicked(mouseX, mouseY, button);
+        return super.mouseClicked(event, doubleClick);
     }
 
     @Override
-    public boolean mouseDragged(double mouseX, double mouseY, int button, double dragX, double dragY) {
-        if (draggingKey != null && button == 0) {
+    public boolean mouseDragged(MouseButtonEvent event, double dragX, double dragY) {
+        if (draggingKey != null && event.button() == 0) {
             HudConfig.Entry cfg = SimpleHudClient.CONFIG.get(draggingKey);
-            cfg.x = mouseX - dragOffsetX;
-            cfg.y = mouseY - dragOffsetY;
+            cfg.x = event.x() - dragOffsetX;
+            cfg.y = event.y() - dragOffsetY;
             return true;
         }
-        return super.mouseDragged(mouseX, mouseY, button, dragX, dragY);
+        return super.mouseDragged(event, dragX, dragY);
     }
 
     @Override
-    public boolean mouseReleased(double mouseX, double mouseY, int button) {
-        if (button == 0) {
+    public boolean mouseReleased(MouseButtonEvent event) {
+        if (event.button() == 0) {
             draggingKey = null;
         }
-        return super.mouseReleased(mouseX, mouseY, button);
+        return super.mouseReleased(event);
     }
 
     @Override
