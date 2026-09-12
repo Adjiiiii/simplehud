@@ -1,0 +1,33 @@
+name: Build Mod Jar
+
+# Mlaku otomatis saben push kode ning GitHub, utawa isok dipicu manual
+# lewat tab "Actions" > "Build Mod Jar" > "Run workflow".
+on:
+  push:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ambil kode
+        uses: actions/checkout@v4
+
+      - name: Siapno Java 25
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '25'
+
+      - name: Wenehi ijin eksekusi gradlew
+        run: chmod +x ./gradlew
+
+      - name: Build jar
+        run: ./gradlew build --stacktrace
+
+      - name: Unggah hasil jar
+        uses: actions/upload-artifact@v4
+        with:
+          name: simplehud-jar
+          path: build/libs/*.jar
