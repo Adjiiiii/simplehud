@@ -4,14 +4,14 @@ import com.mojang.blaze3d.platform.InputConstants;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
-import net.fabricmc.fabric.api.client.rendering.v1.HudElementRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.VanillaHudElements;
+import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.hud.VanillaHudElements;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.multiplayer.PlayerInfo;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 
 /**
@@ -35,7 +35,7 @@ public class SimpleHudClient implements ClientModInitializer {
 
     /** Kategori keybind, ben nongol dadi grup dhewe nok Options > Controls. */
     private static final KeyMapping.Category CATEGORY = KeyMapping.Category.register(
-            ResourceLocation.fromNamespaceAndPath(MOD_ID, "main")
+            Identifier.fromNamespaceAndPath(MOD_ID, "main")
     );
 
     // --- Kanggo ngitung FPS dhewe (ora gumantung nok field internal game) ---
@@ -71,7 +71,7 @@ public class SimpleHudClient implements ClientModInitializer {
         // digambar bareng nok siji layer, posisi diatur miturut CONFIG.
         HudElementRegistry.attachElementAfter(
                 VanillaHudElements.CHAT,
-                ResourceLocation.fromNamespaceAndPath(MOD_ID, "simple_hud_layer"),
+                Identifier.fromNamespaceAndPath(MOD_ID, "simple_hud_layer"),
                 SimpleHudClient::render
         );
     }
