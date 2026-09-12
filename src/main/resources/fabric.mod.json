@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "simplehud",
+  "version": "${version}",
+  "name": "Simple HUD",
+  "description": "HUD kustom: FPS, koordinat, hari, kompas, ping. Isok on/off lan diatur posisi/ukurane dhewe. Client-side, aman kanggo server apa wae.",
+  "authors": ["Kowe"],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/simplehud/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "my.simplehud.client.SimpleHudClient"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.19.3",
+    "minecraft": "26.2",
+    "fabric-api": "*"
+  }
+}
